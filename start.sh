@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Omorashi Activity Tracker - Linux Start Script
+# Drinking Nights Tracker - Linux Start Script
 
 # Check if Node.js is installed
 if ! command -v node &> /dev/null; then
@@ -25,7 +25,7 @@ if [ ! -d "node_modules" ]; then
 fi
 
 # Start the server
-echo "Starting Omorashi Activity Tracker server on $HOST:$PORT..."
+echo "Starting Drinking Nights Tracker server on $HOST:$PORT..."
 node server.js
 
 # Keep the script running

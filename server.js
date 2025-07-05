@@ -244,7 +244,7 @@ app.get('/api/sessions', isAuthenticated, (req, res) => {
 });
 
 app.post('/api/sessions', isAuthenticated, (req, res) => {
-  const { type, date, location, duration, desperationLevel, difficulty, rating, notes } = req.body;
+      const { type, date, location, duration, partyIntensity, difficulty, rating, notes } = req.body;
   
   if (!type || !date) {
     return res.status(400).json({ success: false, message: 'Type and date are required' });
@@ -253,7 +253,7 @@ app.post('/api/sessions', isAuthenticated, (req, res) => {
   db.run(`INSERT INTO sessions 
     (user_id, type, date, location, duration, desperation_level, difficulty, rating, notes, party_points, purchases, drinks, food) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
-    [req.session.userId, type, date, location || '', duration || 0, desperationLevel || 5, difficulty || 'easy', rating || 0, notes || '', 500, '[]', '[]', '[]'], 
+            [req.session.userId, type, date, location || '', duration || 0, partyIntensity || 5, difficulty || 'easy', rating || 0, notes || '', 500, '[]', '[]', '[]'], 
     function(err) {
       if (err) {
         return res.status(500).json({ success: false, message: 'Error creating session' });
@@ -799,7 +799,7 @@ app.post('/api/admin/users/:id/currency', isAuthenticated, isAdmin, (req, res) =
           date: new Date().toISOString(),
           location: '',
           duration: 0,
-          desperation_level: 5,
+          party_intensity: 5,
           difficulty: 'easy',
           rating: 0,
           notes: reason || 'Currency granted by admin',
@@ -809,7 +809,7 @@ app.post('/api/admin/users/:id/currency', isAuthenticated, isAdmin, (req, res) =
         db.run(`INSERT INTO sessions (user_id, type, date, location, duration, desperation_level, difficulty, rating, notes, party_points)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
           [sessionData.user_id, sessionData.type, sessionData.date, sessionData.location, sessionData.duration, 
-           sessionData.desperation_level, sessionData.difficulty, sessionData.rating, sessionData.notes, sessionData.party_points], 
+           sessionData.party_intensity, sessionData.difficulty, sessionData.rating, sessionData.notes, sessionData.party_points], 
           function(err) {
             if (err) {
               return res.status(500).json({ success: false, message: 'Error creating session for currency' });

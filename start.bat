@@ -1,5 +1,5 @@
 @echo off
-REM Omorashi Activity Tracker - Windows Start Script
+REM Drinking Nights Tracker - Windows Start Script
 
 REM Check if Node.js is installed
 where node >nul 2>nul
@@ -28,7 +28,7 @@ if not exist "node_modules\" (
 )
 
 REM Start the server
-echo Starting Omorashi Activity Tracker server on %HOST%:%PORT%...
+echo Starting Drinking Nights Tracker server on %HOST%:%PORT%...
 node server.js
 
 pause 
