@@ -1,20 +1,18 @@
 # Drinking Nights Tracker
 
-A web application for tracking and managing drinking nights and party sessions with friends, featuring both anonymous and authenticated user modes.
+A secure web application for tracking and managing drinking nights and party sessions with friends. All users must register and login to use the application.
 
 ## Features
 
-- **User Authentication**: Register and login with username and password
-- **Admin Dashboard**: Admin users can view all users and party sessions
-- **User Management**: Admins can edit usernames, change passwords, and delete users
-- **Party Session Management**: Create, view, and delete drinking sessions
-- **Anonymous Mode**: Use the app without creating an account
+- **User Authentication**: Required registration and login with username and password
+- **Session Management**: Create, view, and delete drinking sessions with custom names
+- **User Dashboard**: View recent sessions, statistics, and manage account
+- **Admin Dashboard**: Admin users can view all users and sessions, manage accounts
+- **User Management**: Admins can edit usernames, reset passwords, and delete user accounts
+- **Party Points System**: Earn points during sessions (500 points awarded per session)
 - **Dark Mode**: Toggle between light and dark themes
 - **Responsive Design**: Works on desktop and mobile devices
-- **Party Points System**: Earn points during sessions and unlock party achievements
-- **Drink & Food Tracking**: Log what you drink and eat during party sessions
-- **Party Games**: Interactive elements for group activities
-- **Session Intensity Levels**: Choose from Chill, Party, or Wild intensity modes
+- **Secure Data Storage**: All data stored securely in database with encrypted passwords
 
 ## Tech Stack
 
@@ -56,95 +54,157 @@ The application automatically creates an admin account on first run:
 - **Username**: admin
 - **Password**: admin123
 
-You should change this password after the first login for security.
+**Important**: Change this password after the first login for security.
 
-## User Modes
+## User Types
 
-### Authenticated Users
-- Create an account to store data in the database
-- Data persists between browser sessions
-- Admin users have access to all data
+### Regular Users
+- Must create an account to access any features
+- Can create and manage their own drinking sessions
+- Data is securely stored in the database
+- Can view their own statistics and session history
 
-### Anonymous Users
-- Use the app without creating an account
-- Data is stored in the browser's localStorage
-- Data will be lost when clearing browser data
+### Admin Users
+- All regular user capabilities
+- Access to admin dashboard with system-wide overview
+- Can manage all user accounts
+- Can view all sessions from all users
+- Can grant Party Points to users
+
+## Application Pages
+
+### Main Pages
+- **Homepage**: Welcome page with login/register options
+- **Login/Register**: Authentication forms
+- **Dashboard**: Main user interface for session management
+- **Settings**: Account management and password changes
+- **Play Session**: Simple session overview page
+
+### Admin Only
+- **Admin Dashboard**: Complete system management interface
 
 ## Admin Features
 
 Administrators have access to:
-- View all users in the system
+- View and manage all user accounts
 - Edit usernames for any user
 - Reset passwords for any user
-- Delete users (which also removes all their sessions)
-- View all party sessions from all users
+- Delete users (removes all their sessions)
+- View all drinking sessions from all users
 - Grant Party Points to users
-- View system statistics
+- View system statistics (total users, sessions, weekly activity)
 
-## Party Session Features
+## Session Management
 
-### Session Types
-- **Chill**: Relaxed drinking session with friends
-- **Party**: Moderate intensity party with games and activities
-- **Wild**: High intensity party with challenging activities
+### Creating Sessions
+- Simple session creation with custom names
+- Default session name is "Untitled Session" if none provided
+- Sessions are immediately saved to the database
 
-### Tracking Features
-- Drink consumption logging (type and amount)
-- Food consumption tracking
-- Party Points earning system
-- Session duration and location tracking
-- Friend group management
-- Party games and challenges
+### Session Features
+- View session details (date, time, location, duration, notes)
+- Play sessions with dedicated overview page
+- Delete sessions with confirmation
+- Automatic Party Points awarded (500 points per session)
 
 ## File Structure
 
-- `/css` - Stylesheets
-- `/js` - JavaScript files
-- `/pages` - HTML pages (login, dashboard, admin, party session)
-- `server.js` - Express server and API endpoints
-- `database.sqlite` - SQLite database file (created on first run)
+```
+drinking-nights-tracker/
+├── css/                 # Stylesheets
+│   ├── styles.css      # Global styles and themes
+│   ├── login.css       # Login/register page styles
+│   ├── dashboard.css   # Dashboard and main interface
+│   └── admin.css       # Admin panel styles
+├── js/                 # JavaScript files
+│   ├── app.js          # Homepage functionality
+│   ├── login.js        # Authentication handling
+│   ├── dashboard.js    # Main dashboard logic
+│   ├── settings.js     # Account settings
+│   ├── play-session.js # Session overview
+│   └── admin.js        # Admin panel functionality
+├── pages/              # HTML pages
+│   ├── login.html      # Login and registration
+│   ├── dashboard.html  # Main user dashboard
+│   ├── settings.html   # Account settings
+│   ├── play-session.html # Session overview
+│   └── admin.html      # Admin dashboard
+├── index.html          # Homepage
+├── server.js           # Express server and API
+├── package.json        # Dependencies and scripts
+└── database.sqlite     # SQLite database (auto-created)
+```
 
 ## API Endpoints
 
-### Authentication
-- `POST /api/register` - Register a new user
-- `POST /api/login` - Login a user
+### Authentication (Required for all operations)
+- `POST /api/register` - Register a new user account
+- `POST /api/login` - Login with username and password
 - `POST /api/logout` - Logout current user
-- `GET /api/auth/status` - Check authentication status
+- `GET /api/auth/status` - Check current authentication status
 
-### Sessions
-- `GET /api/sessions` - Get current user's sessions
-- `POST /api/sessions` - Create a new session
-- `DELETE /api/sessions/:id` - Delete a session
-- `GET /api/sessions/:id` - Get session details
-- `POST /api/sessions/:id/actions/drink` - Log a drink
-- `POST /api/sessions/:id/actions/food` - Log food consumption
-- `POST /api/sessions/:id/purchase` - Make a purchase in party shop
+### User Sessions
+- `GET /api/sessions` - Get current user's drinking sessions
+- `POST /api/sessions` - Create a new drinking session
+- `DELETE /api/sessions/:id` - Delete a specific session
+- `GET /api/sessions/:id` - Get details for a specific session
 
-### Admin Only
-- `GET /api/admin/users` - Get all users
-- `GET /api/admin/sessions` - Get all sessions
-- `PUT /api/admin/users/:id/username` - Update a user's username
-- `PUT /api/admin/users/:id/password` - Update a user's password
-- `DELETE /api/admin/users/:id` - Delete a user and all their sessions
+### User Account Management
+- `POST /api/user/change-password` - Change current user's password
+- `POST /api/user/delete-account` - Delete current user's account
+
+### Admin Only Endpoints
+- `GET /api/admin/users` - Get all users in the system
+- `GET /api/admin/sessions` - Get all sessions from all users
+- `PUT /api/admin/users/:id/username` - Update any user's username
+- `PUT /api/admin/users/:id/password` - Reset any user's password
+- `DELETE /api/admin/users/:id` - Delete user and all their sessions
+- `POST /api/admin/users/:id/currency` - Grant Party Points to a user
 
 ## Party Points System
 
-Users earn Party Points during sessions based on:
-- Session intensity level
-- Duration of party
-- Participation in games and challenges
-- Drink and food consumption tracking
+- **Automatic Rewards**: 500 Party Points awarded for each session created
+- **Admin Grants**: Administrators can manually grant additional points to users
+- **Future Use**: Points system ready for future features and rewards
 
-Points can be spent in the Party Shop for virtual items and achievements.
+## Security Features
 
-## Safety Notice
+- **Password Encryption**: All passwords are encrypted using bcrypt
+- **Session Management**: Secure server-side session handling
+- **Authentication Required**: All pages and features require login
+- **Admin Protection**: Admin-only areas properly secured
+- **Data Validation**: Input validation on all forms and API endpoints
+
+## Database Schema
+
+The SQLite database includes:
+- **Users table**: User accounts with encrypted passwords and admin flags
+- **Sessions table**: Drinking session records with user association
+- **Automatic migrations**: Database updates handled automatically
+
+## Development
+
+### Running in Development Mode
+```bash
+npm run dev
+```
+
+This starts the server with nodemon for automatic restarts on code changes.
+
+### Environment
+- Node.js version 14 or higher recommended
+- No external database setup required (SQLite is embedded)
+- All dependencies managed through npm
+
+## Safety and Responsible Use
 
 This application is designed for tracking social drinking experiences responsibly. Please:
-- Drink responsibly and know your limits
-- Never drink and drive
-- Be aware of local laws regarding alcohol consumption
-- Consider the safety of yourself and others
+
+- **Drink Responsibly**: Know your limits and drink in moderation
+- **Never Drink and Drive**: Always have a designated driver or use alternative transportation
+- **Legal Compliance**: Be aware of and follow local laws regarding alcohol consumption
+- **Safety First**: Prioritize the safety and wellbeing of yourself and others
+- **Adult Use Only**: This application is intended for users of legal drinking age
 
 ## License
 
