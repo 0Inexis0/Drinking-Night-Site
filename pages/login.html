@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Drinking Nights Tracker</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body class="page-transition">
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo-container">
+                    <a href="../index.html">
+                        <img src="../logo.png" alt="Drinking Nights Tracker Logo" class="logo-img rounded">
+                        <h1>Drinking Nights Tracker</h1>
+                    </a>
+                </div>
+                <a href="../index.html" class="back-link">← Back to Home</a>
+            </div>
+            <button id="dark-mode-toggle" class="icon-btn dark-toggle" aria-label="Toggle dark mode">
+                <span class="moon-icon">🌙</span>
+                <span class="sun-icon">☀️</span>
+            </button>
+        </header>
+        
+        <main>
+            <div class="auth-container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="login">Login</button>
+                    <button class="tab-btn" data-tab="register">Register</button>
+                </div>
+                
+                <div class="tab-content active" id="login-tab">
+                    <h2>Welcome Back</h2>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-email">Username</label>
+                            <input type="text" id="login-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" required>
+                        </div>
+                        <button type="submit" class="btn primary">Login</button>
+                    </form>
+                </div>
+                
+                <div class="tab-content" id="register-tab">
+                    <h2>Create Account</h2>
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="register-username">Username</label>
+                            <input type="text" id="register-username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Password</label>
+                            <input type="password" id="register-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-confirm-password">Confirm Password</label>
+                            <input type="password" id="register-confirm-password" required>
+                        </div>
+                        <button type="submit" class="btn primary">Register</button>
+                    </form>
+                </div>
+                
+
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Drinking Nights Tracker</p>
+        </footer>
+    </div>
+    
+
+    
+    <script src="../js/login.js"></script>
+</body>
+</html> 

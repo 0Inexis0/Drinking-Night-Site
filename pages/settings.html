@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Drinking Nights Tracker</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/settings.css">
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../logo.png" alt="Drinking Nights Tracker Logo" class="logo-img rounded">
+                    <h1>Drinking Nights Tracker</h1>
+                </a>
+            </div>
+            <div class="user-menu">
+                <div class="user-info">
+                    <span id="username">User</span>
+    
+                </div>
+                <button id="dark-mode-toggle" class="icon-btn dark-toggle" aria-label="Toggle dark mode">
+                    <span class="moon-icon">🌙</span>
+                    <span class="sun-icon">☀️</span>
+                </button>
+                <button id="user-menu-btn" class="btn icon-btn">
+                    <span class="avatar">U</span>
+                </button>
+                <div class="dropdown-menu" id="user-dropdown">
+                    <ul>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="#">Profile <span class="coming-soon">(Coming Soon)</span></a></li>
+                        <li><a href="../index.html" id="logout">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        
+        <main class="settings-content">
+            <div class="settings-header">
+                <h2>Account Settings</h2>
+                <p>Manage your account preferences and security settings</p>
+            </div>
+            
+            <div class="settings-grid">
+                <!-- Password Change Section -->
+                <div class="settings-card">
+                    <h3>Change Password</h3>
+                    <div class="card-content">
+                        <form id="password-change-form" class="settings-form">
+                            <div class="form-group">
+                                <label for="current-password">Current Password</label>
+                                <input type="password" id="current-password" name="current-password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">New Password</label>
+                                <input type="password" id="new-password" name="new-password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm New Password</label>
+                                <input type="password" id="confirm-password" name="confirm-password" required>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn primary">Update Password</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Account Deletion Section -->
+                <div class="settings-card danger-zone">
+                    <h3>Delete Account</h3>
+                    <div class="card-content">
+                        <div class="warning-box">
+                            <div class="warning-icon">⚠️</div>
+                            <div class="warning-text">
+                                <p><strong>Warning:</strong> This action cannot be undone.</p>
+                                <p>Deleting your account will permanently remove all your data, including:</p>
+                                <ul>
+                                    <li>All drinking session history and records</li>
+                                    <li>Personal settings and preferences</li>
+                                    <li>Your profile information</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <form id="account-deletion-form" class="settings-form">
+                            <div class="form-group">
+                                <label for="deletion-password">Enter your password to confirm</label>
+                                <input type="password" id="deletion-password" name="deletion-password" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="deletion-confirm" name="deletion-confirm" required>
+                                    <span>I understand that this action cannot be undone</span>
+                                </label>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn danger">Delete My Account</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Drinking Nights Tracker</p>
+        </footer>
+    </div>
+    
+    <!-- Confirmation Modal -->
+    <div class="modal-overlay" id="confirmation-modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">Confirm Action</h3>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-content" id="modal-content">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+            <div class="modal-actions">
+                <button class="btn secondary" id="cancel-btn">Cancel</button>
+                <button class="btn danger" id="confirm-btn">Confirm</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../js/settings.js"></script>
+</body>
+</html> 

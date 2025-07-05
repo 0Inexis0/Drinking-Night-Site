@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Party Session - Drinking Nights Tracker</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/play-session.css">
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../logo.png" alt="Drinking Nights Tracker Logo" class="logo-img rounded">
+                    <h1>Drinking Nights Tracker</h1>
+                </a>
+            </div>
+            <div class="user-menu">
+                <div class="user-info">
+                    <span id="username">User</span>
+                    <div class="session-info" id="session-info">
+                        Session: <span id="session-name">Untitled</span>
+        
+                    </div>
+                </div>
+                <button id="dark-mode-toggle" class="icon-btn dark-toggle" aria-label="Toggle dark mode">
+                    <span class="moon-icon">🌙</span>
+                    <span class="sun-icon">☀️</span>
+                </button>
+                <button id="user-menu-btn" class="btn icon-btn">
+                    <span class="avatar">U</span>
+                </button>
+                <div class="dropdown-menu" id="user-dropdown">
+                    <ul>
+                        <li><a href="dashboard.html">Back to Dashboard</a></li>
+                        <li><a href="settings.html">Settings</a></li>
+                        <li><a href="#">Profile <span class="coming-soon">(Coming Soon)</span></a></li>
+                        <li><a href="../index.html" id="logout">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        
+        <main class="play-session-content">
+            <div class="session-container">
+                <!-- Overview Section -->
+                <div class="session-overview">
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h3>Party Session Overview</h3>
+                            </div>
+                            <div class="card-content">
+                                <p class="placeholder-text">Your party session content will be added here.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Drinking Nights Tracker</p>
+        </footer>
+    </div>
+    
+    <script src="../js/play-session.js"></script>
+</body>
+</html> 
+</html> 

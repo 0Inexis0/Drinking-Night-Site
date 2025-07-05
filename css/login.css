@@ -1,0 +1,466 @@
+/* Login Page Specific Styles */
+
+body {
+    animation: fadeIn var(--animation-medium) ease-in forwards;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.header-content .logo-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.header-content .logo-container a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.header-content .logo-container h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    margin-left: 0.75rem;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    color: var(--primary-color);
+    text-decoration: none;
+    margin-top: var(--spacing-2);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    transition: all var(--animation-medium) ease;
+    position: relative;
+    padding: var(--spacing-2) var(--spacing-3);
+    border-radius: var(--border-radius);
+    background: var(--water-light);
+}
+
+.back-link::before {
+    content: '←';
+    font-weight: bold;
+    margin-right: var(--spacing-1);
+    transition: transform var(--animation-medium) ease;
+}
+
+.back-link:hover::before {
+    transform: translateX(-2px);
+}
+
+.back-link:hover {
+    color: var(--secondary-color);
+    background: var(--water-medium);
+    transform: translateX(-2px);
+}
+
+/* Dark mode toggle */
+.dark-toggle {
+    font-size: var(--font-size-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-3);
+    border-radius: 50%;
+    background-color: var(--water-light);
+    color: var(--text-color);
+    transition: all var(--animation-medium) ease;
+    border: 2px solid transparent;
+}
+
+.dark-toggle:hover {
+    background-color: var(--water-medium);
+    transform: translateY(-2px) scale(1.05);
+    border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .dark-toggle {
+    background-color: var(--water-light);
+}
+
+[data-theme="dark"] .dark-toggle:hover {
+    background-color: var(--water-medium);
+}
+
+.auth-container {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--box-shadow-lg);
+    padding: 3rem;
+    max-width: 700px;
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    animation: slideUp var(--animation-slow) cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    transform: translateY(20px);
+    opacity: 0;
+    border: 1px solid var(--border-color);
+}
+
+@keyframes slideUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Enhanced water effect in auth container */
+.auth-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+    z-index: 1;
+}
+
+.auth-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: radial-gradient(ellipse at center bottom, var(--water-light), transparent);
+    opacity: 0.6;
+    z-index: 0;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+[data-theme="dark"] .tabs {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    opacity: 0.7;
+    position: relative;
+    transition: all var(--animation-medium) cubic-bezier(0.19, 1, 0.22, 1);
+    color: var(--text-color);
+    overflow: hidden;
+}
+
+.tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    border-radius: 3px 3px 0 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--animation-medium) ease;
+}
+
+.tab-btn:hover {
+    opacity: 1;
+}
+
+.tab-btn:hover::after {
+    transform: scaleX(0.5);
+}
+
+.tab-btn.active {
+    opacity: 1;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.tab-btn.active::after {
+    transform: scaleX(1);
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    position: relative;
+    z-index: 1;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn var(--animation-medium) ease;
+}
+
+.tab-content h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.tab-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    transform: scaleX(0.7);
+    opacity: 0.7;
+    transition: transform var(--animation-medium) ease, opacity var(--animation-medium) ease;
+}
+
+.tab-content:hover h2::after {
+    transform: scaleX(1);
+    opacity: 1;
+}
+
+/* Enhanced Form Styles */
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.025em;
+    transition: color var(--animation-fast) ease;
+    color: var(--text-color);
+    text-transform: uppercase;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all var(--animation-medium) cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: var(--bg-input);
+    color: var(--text-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.form-group input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+[data-theme="dark"] .form-group input {
+    border: 2px solid var(--border-color);
+    background-color: var(--bg-input);
+    box-shadow: var(--box-shadow);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Remove the problematic label selector since labels come before inputs */
+
+.form-text {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+[data-theme="dark"] .form-text {
+    opacity: 0.6;
+}
+
+.form-text a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    position: relative;
+    transition: all var(--animation-fast) ease;
+}
+
+.form-text a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--secondary-color);
+    transform: scaleX(0);
+    transition: transform var(--animation-medium) ease;
+}
+
+.form-text a:hover {
+    color: var(--primary-color);
+}
+
+.form-text a:hover::after {
+    transform: scaleX(1);
+}
+
+/* Anonymous Section */
+.anonymous-section {
+    margin-top: 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.divider {
+    position: relative;
+    margin: 1.5rem 0;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1), transparent);
+}
+
+[data-theme="dark"] .divider::before {
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.divider span {
+    position: relative;
+    background-color: var(--card-bg);
+    padding: 0 1rem;
+    color: var(--text-color);
+    opacity: 0.6;
+    font-size: 0.9rem;
+}
+
+.anonymous-info {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    opacity: 0.6;
+    line-height: 1.4;
+}
+
+/* Button Styles (overriding some global styles) */
+.btn {
+    width: 100%;
+    margin-top: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    transition: transform var(--animation-fast) ease-out, opacity var(--animation-fast) ease-out;
+}
+
+.btn:hover::after {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.btn.primary {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    box-shadow: 0 4px 15px rgba(106, 17, 203, 0.2);
+    transform: translateY(0);
+    transition: all var(--animation-medium) cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(106, 17, 203, 0.4);
+}
+
+#anonymous-login {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: none;
+    transition: all var(--animation-medium) ease;
+}
+
+[data-theme="dark"] #anonymous-login {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#anonymous-login:hover {
+    background-color: var(--water-light);
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+    transform: translateY(-3px);
+}
+
+[data-theme="dark"] #anonymous-login:hover {
+    background-color: var(--water-light);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dark-toggle {
+        font-size: 1rem;
+    }
+    
+    .auth-container {
+        padding: 1.5rem;
+    }
+    
+    .tab-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+} 

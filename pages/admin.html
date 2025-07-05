@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Drinking Nights Tracker</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../logo.png" alt="Drinking Nights Tracker Logo" class="logo-img rounded">
+                    <h1>Drinking Nights Tracker</h1>
+                </a>
+                <span class="admin-badge">Admin Panel</span>
+            </div>
+            <div class="user-menu">
+                <div class="user-info">
+                    <span id="username">Admin</span>
+                </div>
+                <button id="dark-mode-toggle" class="icon-btn dark-toggle" aria-label="Toggle dark mode">
+                    <span class="moon-icon">🌙</span>
+                    <span class="sun-icon">☀️</span>
+                </button>
+                <button id="user-menu-btn" class="btn icon-btn">
+                    <span class="avatar">A</span>
+                </button>
+                <div class="dropdown-menu" id="user-dropdown">
+                    <ul>
+                        <li><a href="dashboard.html">User Dashboard</a></li>
+                        <li><a href="../index.html" id="logout">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        
+        <main class="dashboard-content">
+            <div class="welcome-banner admin-banner">
+                <h2>Admin Dashboard</h2>
+                <p>Manage users and view all drinking session data</p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Users</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table class="data-table" id="users-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Username</th>
+                                        <th>Role</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Users will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>All Drinking Sessions</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table class="data-table" id="sessions-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>User</th>
+                                        <th>Type</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Sessions will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>System Stats</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="stat-item">
+                            <span class="stat-label">Total Users</span>
+                            <span class="stat-value" id="total-users">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Sessions</span>
+                            <span class="stat-value" id="total-sessions">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Sessions This Week</span>
+                            <span class="stat-value" id="sessions-this-week">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 Drinking Nights Tracker</p>
+        </footer>
+    </div>
+    
+    <!-- Session Detail Modal -->
+    <div class="activity-modal-overlay" id="activity-modal-overlay">
+        <div class="activity-detail-modal">
+            <div class="activity-detail-header">
+                <h3 id="activity-detail-title">Session Details</h3>
+                <button class="close-modal" id="close-activity-modal">&times;</button>
+            </div>
+            <div class="activity-detail-content" id="activity-detail-content">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+            <div class="modal-actions">
+                <button class="btn secondary" id="close-detail-btn">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- User Management Modal -->
+    <div class="activity-modal-overlay" id="user-manage-modal-overlay">
+        <div class="activity-detail-modal">
+            <div class="activity-detail-header">
+                <h3 id="user-manage-title">Edit User</h3>
+                <button class="close-modal" id="close-user-manage-modal">&times;</button>
+            </div>
+            <form id="user-manage-form">
+                <div class="form-group">
+                    <label for="user-username">Username</label>
+                    <input type="text" id="user-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-password">New Password (leave blank to keep current)</label>
+                    <input type="password" id="user-password">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn danger" id="delete-user-btn">Delete User</button>
+                    <div class="right-actions">
+                        <button type="button" class="btn secondary" id="cancel-user-manage">Cancel</button>
+                        <button type="submit" class="btn primary">Save Changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Currency Management Modal -->
+    <div class="activity-modal-overlay" id="currency-manage-modal-overlay">
+        <div class="activity-detail-modal">
+            <div class="activity-detail-header">
+                <h3 id="currency-manage-title">Grant Currency</h3>
+                <button class="close-modal" id="close-currency-manage-modal">&times;</button>
+            </div>
+            <form id="currency-manage-form">
+                <div class="form-group">
+                    <label for="currency-amount">Amount (Party Points)</label>
+                    <input type="number" id="currency-amount" min="1" required placeholder="Enter amount to grant">
+                </div>
+                <div class="form-group">
+                    <label for="currency-reason">Reason (optional)</label>
+                    <input type="text" id="currency-reason" placeholder="Reason for granting currency">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn secondary" id="cancel-currency-manage">Cancel</button>
+                    <button type="submit" class="btn primary">Grant Currency</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="../js/admin.js"></script>
+</body>
+</html> 
